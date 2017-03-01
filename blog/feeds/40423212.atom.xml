@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-03-07T11:00:00+08:00</updated><entry><title>week3</title><link href="./week3.html" rel="alternate"></link><updated>2017-03-07T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-07:./week3.html</id><summary type="html">&lt;p&gt;介紹課程大綱
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/40423212.atom.xml" rel="self"></link><id>./</id><updated>2017-03-07T11:00:00+08:00</updated><entry><title>week3</title><link href="./week3.html" rel="alternate"></link><updated>2017-03-07T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-07:./week3.html</id><summary type="html">&lt;p&gt;介紹課程大綱
 &lt;/p&gt;</summary><category term="w3"></category></entry><entry><title>week2</title><link href="./week2.html" rel="alternate"></link><updated>2017-03-01T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-01:./week2.html</id><summary type="html">&lt;p&gt;使用py進行有效率的分組
 
 &lt;p&gt;使用ethercalc製作簡易的分組表格&lt;/p&gt;
