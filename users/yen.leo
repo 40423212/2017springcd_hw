@@ -42,6 +42,9 @@
 <v t="leo.20170301112849.1" a="E"><vh>封面投影片</vh>
 <v t="leo.20170301112849.2"><vh>封面投影片內容</vh></v>
 </v>
+<v t="leo.20170301113453.1" a="E"><vh>封面投影片</vh>
+<v t="leo.20170301113453.2"><vh>封面投影片內容</vh></v>
+</v>
 </v>
 </v>
 </v>
@@ -89,12 +92,12 @@
 </t>
 <t tx="leo.20170222115530.2">#week1筆記
 
-*認識Blender 3dstudio maya
+* 認識Blender 3dstudio maya
 * 了解stunnel使用 http的proxy
 * stunnel&gt;config&gt;stunnel.conf\
 * ;(分號)=註解
 * ipconfig /all 查詢ip
-*修改ip https://192.168.1.24/2017springvcp_hw/index
+* 修改ip https://192.168.1.24/2017springvcp_hw/index
 * 利用vrep配合Scite完成做動模擬
 
 
@@ -109,11 +112,24 @@
 						
 </t>
 <t tx="leo.20170301112849.2">#week2
-*使用ethercalc製作簡易的分組表格
+* 使用ethercalc製作簡易的分組表格
 * 認識cp950(大五碼)
 * 使用py建立分組程序，並且挑出未被分類的學生
-*製作簡易連桿組
+* 製作簡易連桿組
 * 了解vrep起始抓點，在做stl檔的時候原點需跟物件拉開一定距離
+
+
+</t>
+<t tx="leo.20170301113453.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20170301113453.2">#week3
 
 
 </t>
