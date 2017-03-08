@@ -113,6 +113,7 @@
 						
 </t>
 <t tx="leo.20170301112849.2">#week2
+
 * 使用ethercalc製作簡易的分組表格
 * 認識cp950(大五碼)
 * 使用py建立分組程序，並且挑出未被分類的學生
@@ -132,6 +133,10 @@
 </t>
 <t tx="leo.20170301113453.2">#week3
 
+*從 https://mde2al.kmol.info 進入新區域的wiki檢視每周進度
+*了解Altair的soildthinking
+*認識Altair的特色，其中包括檢測受力.受熱.流力.最小化資源利用.較*為人性的快捷列
+*更改start的fossil路徑並且建立自己的近端fossil帳號密碼
 
 </t>
 <t tx="yen.20170108171605.1"></t>
