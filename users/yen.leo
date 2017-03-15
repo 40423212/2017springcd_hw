@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="yen.20170108171605.1"><vh>@settings</vh>
+<v t="yen.20170108171605.1" a="E"><vh>@settings</vh>
 <v t="yen.20170108171605.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="yen.20170108171605.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
@@ -33,17 +33,20 @@
 <v t="yen.20170120110024.4" a="E"><vh>body</vh>
 <v t="yen.20170120110024.5" a="E"><vh>reveal div</vh>
 <v t="yen.20170120110024.6" a="E"><vh>slides div</vh>
-<v t="yen.20170120110024.7" a="E"><vh>封面投影片</vh>
+<v t="yen.20170120110024.7"><vh>封面投影片</vh>
 <v t="yen.20170120110024.8"><vh>封面投影片內容</vh></v>
 </v>
-<v t="leo.20170222115530.1" a="E"><vh>封面投影片</vh>
+<v t="leo.20170222115530.1"><vh>封面投影片</vh>
 <v t="leo.20170222115530.2"><vh>封面投影片內容</vh></v>
 </v>
-<v t="leo.20170301112849.1" a="E"><vh>封面投影片</vh>
+<v t="leo.20170301112849.1"><vh>封面投影片</vh>
 <v t="leo.20170301112849.2"><vh>封面投影片內容</vh></v>
 </v>
 <v t="leo.20170301113453.1" a="E"><vh>封面投影片</vh>
 <v t="leo.20170301113453.2"><vh>封面投影片內容</vh></v>
+</v>
+<v t="leo.20170315105335.1" a="E"><vh>封面投影片</vh>
+<v t="leo.20170315105335.2"><vh>封面投影片內容</vh></v>
 </v>
 </v>
 </v>
@@ -137,6 +140,22 @@
 * 了解Altair的soildthinking
 * 認識Altair的特色，其中包括檢測受力.受熱.流力.最小化資源利用.較* 為人性的快捷列
 * 更改start的fossil路徑並且建立自己的近端fossil帳號密碼
+
+</t>
+<t tx="leo.20170315105335.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20170315105335.2">#week4
+
+* 使用老師建立的新fossil，獲得管理權後加入其他組員
+* 認識Xming X-windows vnc remote desktop
+* 介紹altair的應力分析
 
 </t>
 <t tx="yen.20170108171605.1"></t>
