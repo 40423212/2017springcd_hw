@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/40423212.atom.xml" rel="self"></link><id>./</id><updated>2017-03-22T11:00:00+08:00</updated><entry><title>week5</title><link href="./week5.html" rel="alternate"></link><published>2017-03-22T11:00:00+08:00</published><updated>2017-03-22T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-22:./week5.html</id><summary type="html">&lt;p&gt;fossil wiki首頁的使用及使one-link bar轉動
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/40423212.atom.xml" rel="self"></link><id>./</id><updated>2017-03-22T11:00:00+08:00</updated><entry><title>week5</title><link href="./week5.html" rel="alternate"></link><updated>2017-03-22T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-22:./week5.html</id><summary type="html">&lt;p&gt;fossil wiki首頁的使用及使one-link bar轉動
 &lt;/p&gt;
 &lt;p&gt;建立一個與project name同名的wiki，該wiki會成為首頁&lt;/p&gt;
 
@@ -9,14 +9,14 @@
 
 &lt;p&gt;做好one link bar 之後要利用export triangle mesh存成stl檔，在V-REP用inport打開此檔案，之後用edit&gt;grouping/merging&gt;divide selected shapes進行分解&lt;/p&gt;
 
-&lt;p&gt;將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動&lt;/p&gt;</summary><category term="w5"></category></entry><entry><title>week4</title><link href="./week4.html" rel="alternate"></link><published>2017-03-20T11:00:00+08:00</published><updated>2017-03-20T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-20:./week4.html</id><summary type="html">&lt;p&gt;運營fossil製程的wiki
+&lt;p&gt;將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動&lt;/p&gt;</summary><category term="w5"></category></entry><entry><title>week4</title><link href="./week4.html" rel="alternate"></link><updated>2017-03-20T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-20:./week4.html</id><summary type="html">&lt;p&gt;運營fossil製程的wiki
 
 &lt;p&gt;使用老師建立的新fossil，獲得管理權後加入其他組員&lt;/p&gt;
 &lt;p&gt;介紹altair的應力分析&lt;/p&gt;
 &lt;p&gt;認識Xming X-windows vnc remote desktop&lt;/p&gt;&lt;/p&gt;
 &lt;iframe src="https://player.vimeo.com/video/209206357" width="640" height="333" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
 
-&lt;p&gt;&lt;a href="https://vimeo.com/209206357"&gt;2017-03-20_22-26-25 40423212﹍w4&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;</summary><category term="w4"></category></entry><entry><title>week3</title><link href="./week3.html" rel="alternate"></link><published>2017-03-07T11:00:00+08:00</published><updated>2017-03-07T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-07:./week3.html</id><summary type="html">&lt;p&gt;介紹Altair及製作近端fossil
+&lt;p&gt;&lt;a href="https://vimeo.com/209206357"&gt;2017-03-20_22-26-25 40423212﹍w4&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;</summary><category term="w4"></category></entry><entry><title>week3</title><link href="./week3.html" rel="alternate"></link><updated>2017-03-07T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-07:./week3.html</id><summary type="html">&lt;p&gt;介紹Altair及製作近端fossil
 
 &lt;p&gt;從 https://mde2al.kmol.info 進入新區域的wiki檢視每周進度&lt;/p&gt;
 &lt;p&gt;了解Altair的soildthinking&lt;/p&gt;
@@ -24,7 +24,7 @@
 &lt;p&gt;更改start的fossil路徑並且建立自己的近端fossil帳號密碼&lt;/p&gt;&lt;/p&gt;
 &lt;iframe src="https://player.vimeo.com/video/208333078" width="640" height="480" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
 
-&lt;p&gt;&lt;a href="https://vimeo.com/208333078"&gt;2017-03-10_40423212_w3&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;</summary><category term="w3"></category></entry><entry><title>week2</title><link href="./week2.html" rel="alternate"></link><published>2017-03-01T11:00:00+08:00</published><updated>2017-03-01T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-01:./week2.html</id><summary type="html">&lt;p&gt;使用py進行有效率的分組
+&lt;p&gt;&lt;a href="https://vimeo.com/208333078"&gt;2017-03-10_40423212_w3&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;</summary><category term="w3"></category></entry><entry><title>week2</title><link href="./week2.html" rel="alternate"></link><updated>2017-03-01T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-01:./week2.html</id><summary type="html">&lt;p&gt;使用py進行有效率的分組
 
 &lt;p&gt;使用ethercalc製作簡易的分組表格&lt;/p&gt;
 &lt;p&gt;認識cp950(大五碼)&lt;/p&gt;
@@ -32,7 +32,7 @@
 &lt;p&gt;製作簡易連桿組&lt;/p&gt;
 &lt;p&gt;了解vrep起始抓點，在做stl檔的時候原點需跟物件拉開一定距離&lt;/p&gt;
 &lt;iframe src="https://player.vimeo.com/video/206248051" width="640" height="443" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
-&lt;p&gt;&lt;a href="https://vimeo.com/206248051"&gt;2017-03-02 40423212 w2&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;&lt;/p&gt;</summary><category term="w2"></category></entry><entry><title>week1</title><link href="./week1.html" rel="alternate"></link><published>2017-02-24T11:00:00+08:00</published><updated>2017-02-24T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-24:./week1.html</id><summary type="html">&lt;p&gt;介紹課程大綱
+&lt;p&gt;&lt;a href="https://vimeo.com/206248051"&gt;2017-03-02 40423212 w2&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;&lt;/p&gt;</summary><category term="w2"></category></entry><entry><title>week1</title><link href="./week1.html" rel="alternate"></link><updated>2017-02-24T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-02-24:./week1.html</id><summary type="html">&lt;p&gt;介紹課程大綱
 
 &lt;p&gt;了解Blender 3dstudio maya之相關性&lt;/p&gt;
 &lt;p&gt;stunnel 的使用 http的proxy&lt;/p&gt;

@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="yen.20170108171605.1" a="E"><vh>@settings</vh>
+<v t="yen.20170108171605.1"><vh>@settings</vh>
 <v t="yen.20170108171605.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="yen.20170108171605.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
@@ -62,7 +62,7 @@
 <v t="leo.20170301120755.1"><vh>@edit 20170308.md</vh></v>
 <v t="leo.20170320222159.1"><vh>@edit 20170320.md</vh></v>
 <v t="leo.20170322113812.1"><vh>@edit 20170322.md</vh></v>
-<v t="yen.20170108171733.81" a="E"><vh>@path pages</vh>
+<v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
 </v>
@@ -176,13 +176,13 @@
 
 * 建立一個與project name同名的wiki，該wiki會成為首頁
 
-*認識fossil wiki的三種編譯方式-Fossil wiki，Markdown 以及Plain text
+* 認識fossil wiki的三種編譯方式-Fossil wiki，Markdown 以及Plain text
 
-*嘗試利用V-rep使solvespace做出的one-link bar，利用triangle mesh存檔後進行旋轉做動
+* 嘗試利用V-rep使solvespace做出的one-link bar，利用triangle mesh存檔後進行旋轉做動
 
-*做好one link bar 之後要利用export triangle mesh存成stl檔，在V-REP用inport打開此檔案，之後用edit&gt;grouping/merging&gt;divide selected shapes進行分解
+* 做好one link bar 之後要利用export triangle mesh存成stl檔，在V-REP用inport打開此檔案，之後用edit&gt;grouping/merging&gt;divide selected shapes進行分解
 
-*將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動
+* 將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動
 </t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
