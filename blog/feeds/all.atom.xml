@@ -9,7 +9,11 @@
 
 &lt;p&gt;做好one link bar 之後要利用export triangle mesh存成stl檔，在V-REP用inport打開此檔案，之後用edit&gt;grouping/merging&gt;divide selected shapes進行分解&lt;/p&gt;
 
-&lt;p&gt;將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動&lt;/p&gt;</summary><category term="w5"></category></entry><entry><title>week4</title><link href="./week4.html" rel="alternate"></link><updated>2017-03-20T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-20:./week4.html</id><summary type="html">&lt;p&gt;運營fossil製程的wiki
+&lt;p&gt;將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動&lt;/p&gt;
+
+&lt;iframe src="https://player.vimeo.com/video/210402905" width="640" height="333" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen&gt;&lt;/iframe&gt;
+
+&lt;p&gt;&lt;a href="https://vimeo.com/210402905"&gt;2017-03-28_18-30-41 40423212_hw5&lt;/a&gt; from &lt;a href="https://vimeo.com/user45523667"&gt;40423212&lt;/a&gt; on &lt;a href="https://vimeo.com"&gt;Vimeo&lt;/a&gt;.&lt;/p&gt;</summary><category term="w5"></category></entry><entry><title>week4</title><link href="./week4.html" rel="alternate"></link><updated>2017-03-20T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-03-20:./week4.html</id><summary type="html">&lt;p&gt;運營fossil製程的wiki
 
 &lt;p&gt;使用老師建立的新fossil，獲得管理權後加入其他組員&lt;/p&gt;
 &lt;p&gt;介紹altair的應力分析&lt;/p&gt;
