@@ -51,6 +51,9 @@
 <v t="leo.20170322113746.1" a="E"><vh>封面投影片</vh>
 <v t="leo.20170322113746.2"><vh>封面投影片內容</vh></v>
 </v>
+<v t="leo.20170329112433.1" a="E"><vh>封面投影片</vh>
+<v t="leo.20170329112433.2"><vh>封面投影片內容</vh></v>
+</v>
 </v>
 </v>
 </v>
@@ -62,6 +65,7 @@
 <v t="leo.20170301120755.1"><vh>@edit 20170308.md</vh></v>
 <v t="leo.20170320222159.1"><vh>@edit 20170320.md</vh></v>
 <v t="leo.20170322113812.1"><vh>@edit 20170322.md</vh></v>
+<v t="leo.20170329112538.1"><vh>@edit 20170329.md</vh></v>
 <v t="yen.20170108171733.81"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -184,6 +188,19 @@
 
 * 將軸放至底部的子目錄，再將上蓋放置軸的子目錄進行固定，最後將軸變成馬達，即可讓簡易的one-link bar進行轉動
 </t>
+<t tx="leo.20170329112433.1">&lt;section data-markdown&gt;
+    &lt;script type="text/template"&gt;
+@others
+    &lt;/script&gt;
+&lt;/section&gt;
+
+
+						
+</t>
+<t tx="leo.20170329112433.2">#week6
+
+* 完成其他組件的v-rep做動模擬
+* 完成課程遺漏部分，便於下週進行自評</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
