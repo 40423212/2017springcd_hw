@@ -200,7 +200,7 @@
 <t tx="leo.20170329112433.2">#week6
 
 * 完成其他組件的v-rep做動模擬
-* 完成課程遺漏部分，便於下週進行自評</t>
+* 完成課程遺漏部分便於下週進行自評</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
