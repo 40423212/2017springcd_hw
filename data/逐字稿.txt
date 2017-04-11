@@ -1,0 +1,15 @@
+One of the biggest new capablity is a hyperworks
+fourteen now is a new modeling in some capability hyper mesh
+most people in manufacture products and many different configureation in those products
+and they want to keep their CAmodels very much in the sink with the CAD appeal a lot of system
+so now we introduce in the hyper mesh in abllity to sinkernize directly with the PDM system
+actually we port the materials with mutiple configureation of the model
+so that the hyper mesh model has all those configureation that each part of the hyper mesh model
+can now have mutiple  and by just re-configuring the model you can match the configuration that you nornally we know the CADmob
+we also introduce what is called about a part tentity now hypermesh just like a CAD partentity
+so what that a lot is abuse if you zap thing though materials and hyper mesh how would you had a CAD system
+what we can do now is have say what can solve of this normally consist in many different conpoments and shelter parts
+and you still want a group oppoments of the single part of the management simply hold in
+so now those conbine exist in one part but you can also have mutiple representation for that part
+so if you want other representation what you maybe have a different
+mashidencity you can do that and figure your model according to different type so dissappoint for crash or NVH

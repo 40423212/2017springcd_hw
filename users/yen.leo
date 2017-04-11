@@ -33,7 +33,7 @@
 <v t="yen.20170120110024.4" a="E"><vh>body</vh>
 <v t="yen.20170120110024.5" a="E"><vh>reveal div</vh>
 <v t="yen.20170120110024.6" a="E"><vh>slides div</vh>
-<v t="yen.20170120110024.7"><vh>封面投影片</vh>
+<v t="yen.20170120110024.7" a="E"><vh>封面投影片</vh>
 <v t="yen.20170120110024.8"><vh>封面投影片內容</vh></v>
 </v>
 <v t="leo.20170222115530.1"><vh>封面投影片</vh>
@@ -216,7 +216,9 @@
 </t>
 <t tx="leo.20170405083215.2">#week7
 
-* </t>
+* 往fossil傳遞檔案，以及onshape參數繪圖 
+
+*[第七周上課內容](https://40423212.github.io/2017springcd_hw/blog/week7.html)</t>
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
