@@ -368,6 +368,13 @@ for data in fourbar_list[1:]:
     #container1 <= str(count) + ":" + point[0] + "," + point[1]
     #container1 <= html.BR()
     ctx.lineTo(float(point[0])*ratio, float(point[1])*ratio)
+
+for data in fourbar2_list[1:]:
+    point = data.split(",")
+    #count = count + 1
+    #container1 <= str(count) + ":" + point[0] + "," + point[1]
+    #container1 <= html.BR()
+    ctx.lineTo(float(point[0])*ratio, float(point[1])*ratio)
 # 設定顏色為藍色, 也可以使用 "rgb(0, 0, 255)" 字串設定顏色值
 ctx.strokeStyle = "blue"
 # 實際執行畫線
