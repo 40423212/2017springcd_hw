@@ -170,13 +170,13 @@ init_mathjax();
 
         <meta name="author" content="yen" />
         <meta name="keywords" content="w8" />
-        <meta name="description" content="window.onload=function(){ brython(1); } from browser import document as doc from browser import html import math # 準備繪圖畫布 canvas = doc[&#34;fourbar&#34;] container1 = doc[&#39;container1&#39;] ctx = canvas.getContext(&#34;2d&#34;) fourbar_data = open(&#34;./../data/midterm1.csv&#34;;&#34;./../data/midterm2.csv&#34;).read() fourbar_list = fourbar_data.splitlines() #container1" />
+        <meta name="description" content="window.onload=function(){ brython(1); } from browser import document as doc from browser import html import math # 準備繪圖畫布 canvas = doc[&#34;fourbar&#34;] container1 = doc[&#39;container1&#39;] ctx = canvas.getContext(&#34;2d&#34;) fourbar_data = open(&#34;./../data/midterm1.csv&#34;,&#34;./../data/midterm2.csv&#34;).read() fourbar_list = fourbar_data.splitlines() #container1" />
 
         <meta property="og:site_name" content="2017Spring 協同產品設計實習 (虎尾科大MDE)" />
         <meta property="og:type" content="article"/>
         <meta property="og:title" content="test"/>
         <meta property="og:url" content="./test.html"/>
-        <meta property="og:description" content="window.onload=function(){ brython(1); } from browser import document as doc from browser import html import math # 準備繪圖畫布 canvas = doc[&#34;fourbar&#34;] container1 = doc[&#39;container1&#39;] ctx = canvas.getContext(&#34;2d&#34;) fourbar_data = open(&#34;./../data/midterm1.csv&#34;;&#34;./../data/midterm2.csv&#34;).read() fourbar_list = fourbar_data.splitlines() #container1"/>
+        <meta property="og:description" content="window.onload=function(){ brython(1); } from browser import document as doc from browser import html import math # 準備繪圖畫布 canvas = doc[&#34;fourbar&#34;] container1 = doc[&#39;container1&#39;] ctx = canvas.getContext(&#34;2d&#34;) fourbar_data = open(&#34;./../data/midterm1.csv&#34;,&#34;./../data/midterm2.csv&#34;).read() fourbar_list = fourbar_data.splitlines() #container1"/>
         <meta property="article:published_time" content="2017-04-05" />
             <meta property="article:section" content="40423212" />
             <meta property="article:tag" content="w8" />
@@ -340,7 +340,7 @@ canvas = doc["fourbar"]
 container1 = doc['container1']
 ctx = canvas.getContext("2d")
 
-fourbar_data = open("./../data/midterm1.csv";"./../data/midterm2.csv").read()
+fourbar_data = open("./../data/midterm1.csv","./../data/midterm2.csv").read()
 fourbar_list = fourbar_data.splitlines()
 #container1 <= fourbar_list[0]
 # 以下可以利用 ctx 物件進行畫圖
