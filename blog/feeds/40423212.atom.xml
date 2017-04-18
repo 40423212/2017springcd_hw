@@ -10,7 +10,7 @@
 window.onload = function(){
     var madeleine = new Madeleine({
       target: 'target', // target div id
-      data: './../data/Assembly 1.stl', // data path
+      data: './../data/Assembly1.stl', // data path
       path: './../data/madeleine/src/' // path to source directory from current html file
     });
 }; 
