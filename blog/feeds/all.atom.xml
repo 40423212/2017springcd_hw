@@ -14,7 +14,7 @@ brython(1);
 
 &lt;!-- 以下實際利用  Brython 畫四連桿 trace point 路徑--&gt;
 
-&lt;canvas id="fourbar" width="600" height="400"&gt;&lt;/canvas&gt;
+&lt;canvas id="fourbar" width="1920" height="1768"&gt;&lt;/canvas&gt;
 
 &lt;div id="container1"&gt;&lt;/div&gt;
 
@@ -41,7 +41,7 @@ ctx.lineWidth = 1
 ctx.transform(1, 0, 0, -1, canvas.width/2+250, canvas.height/2+100)
 # 畫出 x 與 y 座標線
 # 各座標值放大 8 倍
-ratio = 2
+ratio = 8
 ctx.moveTo(0, 0)
 ctx.lineTo(-30*ratio, 0)
 start_point = fourbar_list[0].split(",")
