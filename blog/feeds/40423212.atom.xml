@@ -27,7 +27,7 @@ canvas = doc["fourbar"]
 container1 = doc['container1']
 ctx = canvas.getContext("2d")
 
-fourbar_data = open("./../data/midterm1.csv ,./../data/midterm2.csv").read()
+fourbar_data = open('./../data/midterm1.csv','./../data/midterm2.csv').read()
 fourbar_list = fourbar_data.splitlines()
 #container1 &lt;= fourbar_list[0]
 # 以下可以利用 ctx 物件進行畫圖
