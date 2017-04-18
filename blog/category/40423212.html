@@ -280,7 +280,24 @@ init_mathjax();
 
             <article>
                 <h2><a href="../test.html">test</a></h2>
-                <div class="summary"><!-- 導入 Brython 標準程式庫 -->
+                <div class="summary"><p><link href="./../data/madeleine/src/css/Madeleine.css" rel="stylesheet">
+<script src="./../data/madeleine/src/lib/stats.js"></script>
+<script src="./../data/madeleine/src/lib/detector.js"></script>
+<script src="./../data/madeleine/src/lib/three.min.js"></script>
+<script src="./../data/madeleine/src/Madeleine.js"></script></p>
+<div id="target" class="madeleine"></div>
+
+<script>
+window.onload = function(){
+    var madeleine = new Madeleine({
+      target: 'target', // target div id
+      data: './../data/Assembly 1.stl', // data path
+      path: './../data/madeleine/src/' // path to source directory from current html file
+    });
+}; 
+</script>
+
+<!-- 導入 Brython 標準程式庫 -->
 
 <script type="text/javascript" src="https://cdn.rawgit.com/brython-dev/brython/master/www/src/brython_dist.js">
 </script>
@@ -304,16 +321,7 @@ from browser import document as doc
 from browser import html
 import math
 # 準備繪圖畫布
-canvas = doc["fourbar"]
-container1 = doc['container1']
-ctx = canvas.getContext("2d")
-
-fourbar_data = open("./../data/midterm1.csv").read()
-fourbar_list = fourbar_data.splitlines()
-fourbar2_data = open("./../data/midterm2.csv").read()
-fourbar2_list = fourbar2_data.splitlines()
-#container1 <= fourbar_list[0]
-# 以下可以利用 ...</script></!--></!--></!-->
+canvas ...</script></!--></!--></!-->
                     <a class="btn btn-default btn-xs" href="../test.html">more ...</a>
                 </div>
             </article>
