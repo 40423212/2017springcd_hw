@@ -70,7 +70,8 @@
 <v t="leo.20170322113812.1"><vh>@edit 20170322.md</vh></v>
 <v t="leo.20170329112538.1"><vh>@edit 20170329.md</vh></v>
 <v t="leo.20170405083232.1"><vh>@edit 20170405.md</vh></v>
-<v t="yen.20170108171733.81"><vh>@path pages</vh>
+<v t="leo.20170503115146.1"><vh>@edit 20170503.md</vh></v>
+<v t="yen.20170108171733.81" a="E"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
 </v>
@@ -91,7 +92,7 @@
 <v t="yen.20170120232548.1"><vh>calendar example</vh></v>
 <v t="yen.20170123204227.1"><vh>印出月曆以及各課程上課日期</vh></v>
 <v t="yen.20170207092354.1"><vh>協同程式參考</vh></v>
-<v t="yen.20170124102405.1" a="E"><vh>chat</vh>
+<v t="yen.20170124102405.1"><vh>chat</vh>
 <v t="yen.20170124102433.1"><vh>index.html</vh></v>
 </v>
 </v>
