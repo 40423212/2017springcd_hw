@@ -285,7 +285,7 @@ QLabel {
 
 /* Editor labels */
 QLineEdit#editorLabel {
-    background-color: #ffffec;
+    background-color: #0046af;
     font-family:YaHei Mono;
     /* 沒有直接對應字型大小 */
     font-size: 20px;
