@@ -9,7 +9,7 @@
 <preferences/>
 <find_panel_settings/>
 <vnodes>
-<v t="yen.20170108171605.1"><vh>@settings</vh>
+<v t="yen.20170108171605.1" a="E"><vh>@settings</vh>
 <v t="yen.20170108171605.2"><vh>@data qt-gui-plugin-style-sheet</vh></v>
 <v t="yen.20170108171605.3"><vh>@string initial_split_orientation = horizontal</vh></v>
 </v>
@@ -92,7 +92,7 @@
 <v t="yen.20170120232548.1"><vh>calendar example</vh></v>
 <v t="yen.20170123204227.1"><vh>印出月曆以及各課程上課日期</vh></v>
 <v t="yen.20170207092354.1"><vh>協同程式參考</vh></v>
-<v t="yen.20170124102405.1"><vh>chat</vh>
+<v t="yen.20170124102405.1" a="E"><vh>chat</vh>
 <v t="yen.20170124102433.1"><vh>index.html</vh></v>
 </v>
 </v>
@@ -223,7 +223,7 @@
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
-    background-color: #ffffec; /* Leo's traditional tree color */
+    background-color: #1104c9; /* Leo's traditional tree color */
     selection-color: black; /* was white */
     selection-background-color: lightgrey;
     /* font-family: SansSerif; */
