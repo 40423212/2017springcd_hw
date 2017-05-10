@@ -1,5 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-03T11:00:00+08:00</updated><entry><title>week11</title><link href="./week11.html" rel="alternate"></link><published>2017-05-03T11:00:00+08:00</published><updated>2017-05-03T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-03:./week11.html</id><summary type="html">&lt;p&gt;閱讀關於onshape的設計理念，寫出 &lt;a href="https://mde2a2.kmol.info/cdbg2/wcontent"&gt;心得&lt;/a&gt;&lt;/p&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-05-10T11:00:00+08:00</updated><entry><title>week12</title><link href="./week12.html" rel="alternate"></link><published>2017-05-10T11:00:00+08:00</published><updated>2017-05-10T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-10:./week12.html</id><summary type="html">&lt;p&gt;期末協同實習專案規劃與執行
+
+&lt;p&gt;期末協同實習專案規劃與執行,上課時段準備以oral presentation, text presentation,theoretical presentation 逐步朝期末考週 physical presentation的目標邁進。&lt;/p&gt;&lt;/p&gt;
+&lt;p&gt;oral presentation:口語說明進度，規劃細節，分工情形，問題討論。&lt;/p&gt;
+
+&lt;p&gt;text presentation:以gh-pages的blog與Fossil SCM 倉儲wiki紀錄每周專題執行情形。 並利用github與Fossil SCM倉儲管理衍生的檔案。&lt;/p&gt;
+
+&lt;p&gt;theoretical presentation:利用Solvespace，Onshape，V-rep，Brython進行評估模擬。&lt;/p&gt;
+
+&lt;p&gt;physical presentation:在期末考周必須完成實體模型製作，並以video影片展示各階段的準備工作與執行結果。&lt;/p&gt;</summary><category term="w12"></category></entry><entry><title>week11</title><link href="./week11.html" rel="alternate"></link><published>2017-05-03T11:00:00+08:00</published><updated>2017-05-03T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-03:./week11.html</id><summary type="html">&lt;p&gt;閱讀關於onshape的設計理念，寫出 &lt;a href="https://mde2a2.kmol.info/cdbg2/wcontent"&gt;心得&lt;/a&gt;&lt;/p&gt;
 
 
 
