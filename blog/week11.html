@@ -325,12 +325,24 @@ init_mathjax();
 <p><a href="https://vimeo.com/216657832">2017-05-09_20-40-55</a> from <a href="https://vimeo.com/user45523667">40423212</a> on <a href="https://vimeo.com">Vimeo</a>.</p>
 
 <p>利用 <a href="https://github.com/brython-dev/brython/releases/tag/3.3.1">Brython 3.3.1</a> 執行四連桿運動模擬.</p>
-<p>直接在網頁中編寫 Brython 模擬程式:</p>
+<p>結合 <a href="https://github.com/brython-dev/brython/releases/tag/3.3.1">Brython 3.3.1</a> 與 <a href="./../data/w11/cango/Cango-9v05.js">Cango-9v05.js</a> 繪圖, 將 <a href="http://www.arc.id.au/CanvasGraphics.html">Cango Canvas 繪圖範例</a>轉為 Brython.</p>
+<h3><a href="http://www.arc.id.au">Cango 程式庫</a></h3>
 <!-- 導入 Brython 標準程式庫 -->
 
 <script src="./../data/Brython-3.3.1/brython.js"></script>
 
 <script src="./../data/Brython-3.3.1/brython_stdlib.js"></script>
+
+<!-- Cango 程式庫 -->
+
+<script type="text/javascript" src="./../data/w11/cango
+/Cango-9v05-min.js"></script>
+
+<script type="text/javascript" src="./../data/w11/cango
+/CangoAxes-2v09.js"></script>
+
+<script type="text/javascript" src="./../data/w11/cango
+/CangoAnimation-5v00.js"></script>
 
 <!-- 啟動 Brython -->
 
@@ -341,551 +353,445 @@ brython({debug:1, pythonpath:['./../data/py']});
 }
 </script>
 
-<canvas id="plotarea" width="600" height="450"></canvas>
+<!-- 以下實際利用  Brython 繪圖-->
+
+<canvas id="cango_canvas" width="800" height="60"></canvas>
+
+<div id="cango_div" width="800" height="20"></div>
 
 <script type="text/python3">
-from browser import document
+from browser import document as doc
+from browser import window
 import math
-import time
-from browser import timer
-
-class Coord(object):
-    def __init__(self,x,y):
-        self.x = x
-        self.y = y
-
-    def __sub__(self,other):
-        # This allows you to substract vectors
-        return Coord(self.x-other.x,self.y-other.y)
-
-    def __repr__(self):
-        # Used to get human readable coordinates when printing
-        return "Coord(%f,%f)"%(self.x,self.y)
-
-    def length(self):
-        # Returns the length of the vector
-        return math.sqrt(self.x**2 + self.y**2)
-
-    def angle(self):
-        # Returns the vector's angle
-        return math.atan2(self.y,self.x)
-
-def normalize(coord):
-    return Coord(
-        coord.x/coord.length(),
-        coord.y/coord.length()
-        )
-
-def perpendicular(coord):
-    # Shifts the angle by pi/2 and calculate the coordinates
-    # using the original vector length
-    return Coord(
-        coord.length()*math.cos(coord.angle()+math.pi/2),
-        coord.length()*math.sin(coord.angle()+math.pi/2)
-        )
-
-# 點類別
-class Point(object):
-    # 起始方法
-    def __init__(self, x, y):
-        self.x = x
-        self.y = y
-
-    # 繪製方法
-    def drawMe(self, g, r):
-        self.g = g
-        self.r = r
-        self.g.save()
-        self.g.moveTo(self.x,self.y)
-        self.g.beginPath()
-        # 根據 r 半徑繪製一個圓代表點的所在位置
-        self.g.arc(self.x, self.y, self.r, 0, 2*math.pi, True)
-        self.g.moveTo(self.x,self.y)
-        self.g.lineTo(self.x+self.r, self.y)
-        self.g.moveTo(self.x, self.y)
-        self.g.lineTo(self.x-self.r, self.y)
-        self.g.moveTo(self.x, self.y)
-        self.g.lineTo(self.x, self.y+self.r)
-        self.g.moveTo(self.x, self.y)
-        self.g.lineTo(self.x, self.y-self.r)
-        self.g.restore()
-        self.g.stroke()
-
-    # 加入 Eq 方法
-    def Eq(self, pt):
-        self.x = pt.x
-        self.y = pt.y
-
-    # 加入 setPoint 方法
-    def setPoint(self, px, py):
-        self.x = px
-        self.y = py
-
-    # 加上 distance(pt) 方法, 計算點到 pt 的距離
-    def distance(self, pt):
-        self.pt = pt
-        x = self.x - self.pt.x
-        y = self.y - self.pt.y
-        return math.sqrt(x * x + y * y)
-
-    # 利用文字標示點的座標位置
-    def tag(self, g):
-        self.g = g
-        self.g.beginPath()
-        self.g.fillText("%d, %d"%(self.x, self.y),self.x, self.y)
-        self.g.stroke()
-
-
-# Line 類別物件
-class Line(object):
-
-    # 起始方法
-    def __init__(self, p1, p2):
-        self.p1 = p1
-        self.p2 = p2
-        # 直線的第一點, 設為線尾
-        self.Tail = self.p1
-        # 直線組成的第二點, 設為線頭
-        self.Head = self.p2
-        # 直線的長度屬性
-        self.length = math.sqrt(math.pow(self.p2.x-self.p1.x, 2)+math.pow(self.p2.y-self.p1.y,2))
-
-    # setPP 以指定頭尾座標點來定義直線
-    def setPP(self, p1, p2):
-        self.p1 = p1
-        self.p2 = p2
-        self.Tail = self.p1
-        self.Head = self.p2
-        self.length = math.sqrt(math.pow(self.p2.x-self.p1.x, 2)+math.pow(self.p2.y-self.p1.y,2))
-
-    # setRT 方法 for Line, 應該已經確定 Tail 點, 然後以 r, t 作為設定 Head 的參考
-    def setRT(self, r, t):
-        self.r = r
-        self.t = t
-        x = self.r * math.cos(self.t)
-        y = self.r * math.sin(self.t)
-        self.Tail.Eq(self.p1)
-        self.Head.setPoint(self.Tail.x + x,self.Tail.y + y)
-
-    # getR 方法 for Line
-    def getR(self):
-        # x 分量與 y 分量
-        x = self.p1.x - self.p2.x
-        y = self.p1.y - self.p2.y
-        return math.sqrt(x * x + y * y)
-
-    # 根據定義 atan2(y,x), 表示 (x,y) 與 正 x 軸之間的夾角, 介於 pi 與 -pi 間
-    def getT(self):
-        x = self.p2.x - self.p1.x
-        y = self.p2.y - self.p1.y
-        if (math.fabs(x) < math.pow(10,-100)):
-            if(y < 0.0):
-                return (-math.pi/2)
-            else:
-                return (math.pi/2)
-        else:
-            return math.atan2(y, x)
-
-    # setTail 方法 for Line
-    def setTail(self, pt):
-        self.pt = pt
-        self.Tail.Eq(pt)
-        self.Head.setPoint(self.pt.x + self.x, self.pt.y + self.y)
-
-    # getHead 方法 for Line
-    def getHead(self):
-        return self.Head
-
-    def getTail(self):
-        return self.Tail
-
-    def drawMe(self, g):
-        self.g = g
-        self.g.beginPath()
-        self.g.moveTo(self.p1.x,self.p1.y)
-        self.g.lineTo(self.p2.x,self.p2.y)
-        self.g.stroke()
-
-    def test(self):
-        return ("this is pure test to Inherit")
-
-
-class Link(Line):
-    def __init__(self, p1, p2):
-        self.p1 = p1
-        self.p2 = p2
-        self.length = math.sqrt(math.pow((self.p2.x - self.p1.x), 2) + math.pow((self.p2.y - self.p1.y), 2))
-
-    #g context
-    def drawMe(self, g):
-        self.g = g
-        hole = 5
-        radius = 10
-        length = self.getR()
-        # alert(length)
-        # 儲存先前的繪圖狀態
-        self.g.save()
-        self.g.translate(self.p1.x,self.p1.y)
-        #alert(str(self.p1.x)+","+str(self.p1.y))
-        #self.g.rotate(-((math.pi/2)-self.getT()))
-        self.g.rotate(-math.pi*0.5 + self.getT())
-        #alert(str(self.getT()))
-        #self.g.rotate(10*math.pi/180)
-        #this.g.rotate(-(Math.PI/2-this.getT()));
-        # 必須配合畫在 y 軸上的 Link, 進行座標轉換, 也可以改為畫在 x 軸上...
-        self.g.beginPath()
-        self.g.moveTo(0,0)
-        self.g.arc(0, 0, hole, 0, 2*math.pi, True)
-        self.g.stroke()
-        self.g.moveTo(0,length)
-        self.g.beginPath()
-        self.g.arc(0,length, hole, 0, 2*math.pi, True)
-        self.g.stroke()
-        self.g.moveTo(0,0)
-        self.g.beginPath()
-        self.g.arc(0,0, radius, 0, math.pi, True)
-        self.g.moveTo(0+radius,0)
-        self.g.lineTo(0+radius,0+length)
-        self.g.stroke()
-        self.g.moveTo(0,0+length)
-        self.g.beginPath()
-        self.g.arc(0, 0+length, radius, math.pi, 0, True)
-        self.g.moveTo(0-radius,0+length)
-        self.g.lineTo(0-radius,0)
-        self.g.stroke()
-        self.g.restore()
-        '''
-        self.g.beginPath()
-        self.g.fillStyle = "red"
-        self.g.font = "bold 18px sans-serif"
-        self.g.fillText("%d, %d"%(self.p2.x, self.p2.y),self.p2.x, self.p2.y)
-        self.g.stroke()
-        '''
-
-
-class Triangle(object):
-    def __init__(self, p1, p2, p3):
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = p3
-
-    def getLenp3(self):
-        p1 = self.p1
-        ret = p1.distance(self.p2)
-        return ret
-
-    def getLenp1(self):
-        p2 = self.p2
-        ret = p2.distance(self.p3)
-        return ret
-
-    def getLenp2(self):
-        p1 = self.p1
-        ret = p1.distance(self.p3)
-        return ret
-
-    # 角度
-    def getAp1(self):
-        ret = math.acos(((self.getLenp2() * self.getLenp2() + self.getLenp3() * self.getLenp3()) - self.getLenp1() * self.getLenp1()) / (2* self.getLenp2() * self.getLenp3()))
-        return ret
-
-    #
-    def getAp2(self):
-        ret =math.acos(((self.getLenp1() * self.getLenp1() + self.getLenp3() * self.getLenp3()) - self.getLenp2() * self.getLenp2()) / (2* self.getLenp1() * self.getLenp3()))
-        return ret
-
-    def getAp3(self):
-        ret = math.acos(((self.getLenp1() * self.getLenp1() + self.getLenp2() * self.getLenp2()) - self.getLenp3() * self.getLenp3()) / (2* self.getLenp1() * self.getLenp2()))
-        return ret
-
-    def drawMe(self, g):
-        self.g = g
-        r = 5
-        # 繪出三個頂點
-        self.p1.drawMe(self.g,r)
-        self.p2.drawMe(self.g,r)
-        self.p3.drawMe(self.g,r)
-        line1 = Line(self.p1,self.p2)
-        line2 = Line(self.p1,self.p3)
-        line3 = Line(self.p2,self.p3)
-        # 繪出三邊線
-        line1.drawMe(self.g)
-        line2.drawMe(self.g)
-        line3.drawMe(self.g)
-
-    # ends Triangle def
-    # 透過三個邊長定義三角形
-    def setSSS(self, lenp3, lenp1, lenp2):
-        self.lenp3 = lenmidpt = Point(0, 0)
-        self.lenp1 = lenp1
-        self.lenp2 = lenp2
-        self.ap1 = math.acos(((self.lenp2 * self.lenp2 + self.lenp3 * self.lenp3) - self.lenp1 * self.lenp1) / (2* self.lenp2 * self.lenp3))
-        self.ap2 = math.acos(((self.lenp1 * self.lenp1 + self.lenp3 * self.lenp3) - self.lenp2 * self.lenp2) / (2* self.lenp1 * self.lenp3))
-        self.ap3 = math.acos(((self.lenp1 * self.lenp1 + self.lenp2 * self.lenp2) - self.lenp3 * self.lenp3) / (2* self.lenp1 * self.lenp2))
-
-    # 透過兩個邊長與夾角定義三角形
-    def setSAS(self, lenp3, ap2, lenp1):
-        self.lenp3 = lenp3
-        self.ap2 = ap2
-        self.lenp1 = lenp1
-        self.lenp2 = math.sqrt((self.lenp3 * self.lenp3 + self.lenp1 * self.lenp1) - 2* self.lenp3 * self.lenp1 * math.cos(self.ap2))
-        #等於 SSS(AB, BC, CA)
-
-    def setSaSS(self, lenp2, lenp3, lenp1):
-        self.lenp2 = lenp2
-        self.lenp3 = lenp3
-        self.lenp1 = lenp1
-        if(self.lenp1 > (self.lenp2 + self.lenp3)):
-        #<CAB 夾角為 180 度, 三點共線且 A 介於 BC 之間
-            ret = math.pi
-        else :
-            # <CAB 夾角為 0, 三點共線且 A 不在 BC 之間
-            if((self.lenp1 < (self.lenp2 - self.lenp3)) or (self.lenp1 < (self.lenp3 - self.lenp2))):
-                ret = 0.0
-            else :
-            # 透過餘絃定理求出夾角 <CAB 
-                ret = math.acos(((self.lenp2 * self.lenp2 + self.lenp3 * self.lenp3) - self.lenp1 * self.lenp1) / (2 * self.lenp2 * self.lenp3))
-        return ret
-
-    # 取得三角形的三個邊長值
-    def getSSS(self):
-        temp = []
-        temp.append( self.getLenp1() )
-        temp.append( self.getLenp2() )
-        temp.append( self.getLenp3() )
-        return temp
-
-    # 取得三角形的三個角度值
-    def getAAA(self):
-        temp = []
-        temp.append( self.getAp1() )
-        temp.append( self.getAp2() )
-        temp.append( self.getAp3() )
-        return temp
-
-    # 取得三角形的三個角度與三個邊長
-    def getASASAS(self):
-        temp = []
-        temp.append(self.getAp1())
-        temp.append(self.getLenp1())
-        temp.append(self.getAp2())
-        temp.append(self.getLenp2())
-        temp.append(self.getAp3())
-        temp.append(self.getLenp3())
-        return temp
-    #2P 2L return mid P
-    def setPPSS(self, p1, p3, lenp1, lenp3):
-        temp = []
-        self.p1 = p1
-        self.p3 = p3
-        self.lenp1 = lenp1
-        self.lenp3 = lenp3
-
-        #bp3 is the angle beside p3 point, cp3 is the angle for line23, p2 is the output
-        line31 = Line(p3, p1)
-        self.lenp2 = line31.getR()
-        #self.lenp2 = self.p3.distance(self.p1)
-        #這裡是求角3
-        ap3 = math.acos(((self.lenp1 * self.lenp1 + self.lenp2 * self.lenp2) - self.lenp3 * self.lenp3) / (2 * self.lenp1 * self.lenp2))
-        #ap3 = math.acos(((self.lenp1 * self.lenp1 + self.lenp3 * self.lenp3) - self.lenp2 * self.lenp2) / (2 * self.lenp1 * self.lenp3))
-        bp3 = line31.getT()
-        cp3 = bp3 - ap3
-        temp.append(p3.x + self.lenp1*math.cos(cp3))#p2.x
-        temp.append(p3.y + self.lenp1*math.sin(cp3))#p2.y
-        return temp
-
-def tag(g, p):
-    None
-
-midpt = Point(0, 0)
-tippt = Point(0, 0)
-contour = []
-# 執行繪圖流程, 注意 x, y 為 global variables
-def draw():
-    global theta, midpt, oldpt
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    line1.drawMe(context)
-    line2.drawMe(context)
-    line3.drawMe(context)
-    #triangle1.drawMe(context)
-    #triangle2.drawMe(context)
-    theta += dx
-    p2.x = p1.x + line1.length*math.cos(theta*degree)
-    p2.y = p1.y - line1.length*math.sin(theta*degree)
-    p3.x, p3.y = triangle2.setPPSS(p2,p4,link2_len,link3_len)
-    # 計算垂直單位向量
-    a = Coord(p3.x, p3.y)
-    b = Coord(p2.x, p2.y)
-    normal = perpendicular(normalize(a-b))
-    midpt.x = (p2.x + p3.x)/2
-    midpt.y = (p2.y + p3.y)/2
-    tippt.x = midpt.x + 150*normal.x
-    tippt.y = midpt.y + 150*normal.y
-    if theta < 360:
-        contour.append((tippt.x, tippt.y))
-    context.beginPath()
-    context.moveTo(midpt.x, midpt.y)
-    context.lineTo(tippt.x, tippt.y)
-    # 利用 fillRect 繪製一個長寬各 1 單位的正方形
-    for i in range(len(contour)):
-        context.fillRect(contour[i][0], contour[i][1], 1, 1)
-    context.stroke()
-    #p1.tag(context)
-
-
-# 以上為相關函式物件的定義區
-# 全域變數
-# 幾何位置輸入變數
-x=10
-y=10
-r=10
-
-# 畫布與繪圖內容
-# 其他輸入變數
-theta = 0
-degree = math.pi/180.0
-dx = 2
-dy = 4
-
-#set p1.p2.p3.p4 position
-lift = 10
-p1 =  Point(150,100+lift)
-p2 =  Point(150,200+lift)
-p3 =  Point(300,300+lift)
-p4 =  Point(350,100+lift)
-
-#accord position create link
-line1 =  Link(p1,p2)
-line2 =  Link(p2,p3)
-line3 =  Link(p3,p4)
-line4 =  Link(p1,p4)
-line5 =  Link(p2,p4)
-
-link2_len = p2.distance(p3)
-link3_len = p3.distance(p4)
-
-#link2_len = line1.getR()
-#link3_len = line3.getR()
-#alert(str(link2_len)+','+str(link3_len))
-
-triangle1 =  Triangle(p1,p2,p4)
-triangle2 =  Triangle(p2,p3,p4)
-
-# 視窗載入時執行內容
-# 繪圖畫布設定
-
-canvas = document["plotarea"]
-context = canvas.getContext("2d")
-
-# 座標轉換, 移動 canvas.height 並且 y 座標變號, 也就是將原點座標移到畫面左下角
-context.translate(0,canvas.height)
-context.scale(1,-1)
-
-#以間隔 20 micro seconds 重複呼叫 draw()
-timer.set_interval(draw,20)
-#timer.set_interval(draw,10)
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+# 利用 browser 中的 document 擷取 id = "cango_div" 的標註
+cango_div = doc["cango_div"]
+def sayHullo(cvsID):
+    # create a graphics context
+    cgo = cango(cvsID) 
+    # use RH Cartesian on full canvas
+    cgo.setGridboxRHC() 
+    # Different X and Y scale
+    cgo.setWorldCoords(-10, -5, 20, 10)
+    cgo.drawText("以 Cango 顯示中文", {
+        'fillColor': "blue",
+        'fontSize': 58,
+        'lorg':5 })
+sayHullo("cango_canvas")
+cango_div <= "以 Brython 顯示中文"
 </script>
 
-<p>將四連桿模擬程式庫存在 ./../data/py 子目錄, 然後以 import 導入方式執行運算:</p>
-<canvas id="plotarea2" width="600" height="450"></canvas>
+<p><br />
+上述 Cango 與 Brython 文字列印程式碼:</p>
+<pre class="brush: python">
+<!-- 導入 Brython 標準程式庫 -->
+
+<script src="./../data/Brython-3.3.1/brython.js"></script>
+<script src="./../data/Brython-3.3.1/brython_stdlib.js"></script>
+
+<!-- Cango 程式庫 -->
+
+<script type="text/javascript" src="./../data/w11/cango
+/Cango-9v05-min.js"></script>
+<script type="text/javascript" src="./../data/w11/cango
+/CangoAxes-2v09.js"></script>
+<script type="text/javascript" src="./../data/w11/cango
+/CangoAnimation-5v00.js"></script>
+
+<!-- 啟動 Brython -->
+
+<script>
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+</script>
+
+<!-- 以下實際利用  Brython 繪圖-->
+
+<canvas id="cango_canvas" width="800" height="60"></canvas>
+<div id="cango_div" width="800" height="20"></div>
 
 <script type="text/python3">
-# import point-line-triangle module
-import plt
+from browser import document as doc
+from browser import window
 import math
-from browser import document
-from browser import timer
-
-midpt = plt.Point(0, 0)
-tippt = plt.Point(0, 0)
-contour = []
-# 執行繪圖流程, 注意 x, y 為 global variables
-def draw():
-    global theta, midpt, oldpt
-    context.clearRect(0, 0, canvas.width, canvas.height)
-    line1.drawMe(context)
-    line2.drawMe(context)
-    line3.drawMe(context)
-    line4.drawMe(context)
-    #triangle1.drawMe(context)
-    #triangle2.drawMe(context)
-    theta += dx
-    #PLAP
-    p2.x = p1.x + line1.length*math.cos(theta*degree)
-    p2.y = p1.y - line1.length*math.sin(theta*degree)
-    #PLLP
-    p3.x, p3.y = triangle2.setPPSS(p2,p4,line2.length,line3.length)
-    # 計算垂直單位向量
-    a = plt.Coord(p3.x, p3.y)
-    b = plt.Coord(p2.x, p2.y)
-    normal = plt.perpendicular(plt.normalize(a-b))
-    midpt.x = (p2.x + p3.x)/2
-    midpt.y = (p2.y + p3.y)/2
-    tippt.x = midpt.x + 150*normal.x
-    tippt.y = midpt.y + 150*normal.y
-    if theta < 360:
-        contour.append((tippt.x, tippt.y))
-    context.beginPath()
-    context.moveTo(midpt.x, midpt.y)
-    context.lineTo(tippt.x, tippt.y)
-    # 利用 fillRect 繪製一個長寬各 1 單位的正方形
-    for i in range(len(contour)):
-        context.fillRect(contour[i][0], contour[i][1], 1, 1)
-    context.stroke()
-    #p1.tag(context)
-
-
-# 以上為相關函式物件的定義區
-# 全域變數
-# 幾何位置輸入變數
-x=10
-y=10
-r=10
-
-# 畫布與繪圖內容
-# 其他輸入變數
-theta = 0
-degree = math.pi/180.0
-dx = 2
-dy = 4
-
-#set p1.p2.p3.p4 position
-lift = 10
-# 各起始座標點必須精確
-p1 =  plt.Point(150,100+lift)
-p2 =  plt.Point(150,200+lift)
-p3 =  plt.Point(300,300+lift)
-p4 =  plt.Point(350,100+lift)
-#共有五條線
-line1 =  plt.Link(p1,p2)
-line2 =  plt.Link(p2,p3)
-line3 =  plt.Link(p3,p4)
-line4 =  plt.Link(p1,p4)
-line5 =  plt.Link(p2,p4)
-
-#link2_len = p2.distance(p3)
-#link3_len = p3.distance(p4)
-
-#link2_len = line1.getR()
-#link3_len = line3.getR()
-#alert(str(link2_len)+','+str(link3_len))
-
-triangle1 =  plt.Triangle(p1,p2,p4)
-triangle2 =  plt.Triangle(p2,p3,p4)
-
-# 視窗載入時執行內容
-# 繪圖畫布設定
-
-canvas = document["plotarea2"]
-context = canvas.getContext("2d")
-
-# 座標轉換, 移動 canvas.height 並且 y 座標變號, 也就是將原點座標移到畫面左下角
-context.translate(0,canvas.height)
-context.scale(1,-1)
-
-#以間隔 20 micro seconds 重複呼叫 draw()
-timer.set_interval(draw,20)
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+# 利用 browser 中的 document 擷取 id = "cango_div" 的標註
+cango_div = doc["cango_div"]
+def sayHullo(cvsID):
+    # create a graphics context
+    cgo = cango(cvsID) 
+    # use RH Cartesian on full canvas
+    cgo.setGridboxRHC() 
+    # Different X and Y scale
+    cgo.setWorldCoords(-10, -5, 20, 10)
+    cgo.drawText("以 Cango 顯示中文", {
+        'fillColor': "blue",
+        'fontSize': 58,
+        'lorg':5 })
+sayHullo("cango_canvas")
+cango_div <= "以 Brython 顯示中文"
 </script>
+</pre>
+
+<p>Cango drawPath 範例:</p>
+<canvas id="cango_canvas1" width="800" height="600"></canvas>
+
+<script type="text/python3">
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+
+def plotSine(cvsID):
+    data = []
+    g = cango(cvsID)
+    g.setGridboxRHC(10, 10, 80, 60)
+    g.setWorldCoords(0, -50, 2*math.pi, 100)
+    g.drawAxes(0, 6.5, -50, 50, {
+    'xOrigin':0, 'yOrigin':0,
+    'fontSize':10,
+    'strokeColor':'gray'})
+    for i in range(int(2*math.pi/0.03)):
+        #[0, 0.03, 0.06 ... 3.14159]
+        i = i * 0.03
+        # 特別注意在 Javascript 採用 data.push(i, 50*math.sin(i)), 但是 Python 必須分為兩段 append
+        data.append(i)
+        data.append(50*math.sin(i))
+    g.drawPath(data, {'strokeColor':'red'})
+plotSine("cango_canvas1")
+</script>
+
+<p>以上繪圖程式碼:</p>
+<pre class="brush: python">
+<canvas id="cango_canvas1" width="800" height="600"></canvas>
+
+<script type="text/python3">
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+
+def plotSine(cvsID):
+    data = []
+    g = cango(cvsID)
+    g.setGridboxRHC(10, 10, 80, 60)
+    g.setWorldCoords(0, -50, 2*math.pi, 100)
+    g.drawAxes(0, 6.5, -50, 50, {
+    'xOrigin':0, 'yOrigin':0,
+    'fontSize':10,
+    'strokeColor':'gray'})
+    for i in range(int(2*math.pi/0.03)):
+        #[0, 0.03, 0.06 ... 3.14159]
+        i = i * 0.03
+        # 特別注意在 Javascript 採用 data.push(i, 50*math.sin(i)), 但是 Python 必須分為兩段 append
+        data.append(i)
+        data.append(50*math.sin(i))
+    g.drawPath(data, {'strokeColor':'red'})
+plotSine("cango_canvas1")
+</script>
+</pre>
+
+<p>重用 Cango 繪圖物件:</p>
+<canvas id="cango_canvas2" width="800" height="800"></canvas>
+
+<script type="text/python3">
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+shape = window.Shape.new
+shapedefs = window.shapeDefs
+
+def drawSpiral(cvsID):
+    g = cango(cvsID)
+    chamber = ['M',289.16,447.14,
+                 'C',233.33,399.03, 267.47,290.34, 364.53,265.28,
+                     408.88,269.91, 448.14,282.58, 483.22,303.79,
+                     391.79,287.12, 292.99,369.50, 331.90,451.11,
+                     318.79,447.43, 302.35,446.61, 289.16,447.14, 'z']
+    cobj = shape(chamber, {
+        'fillColor':"lightyellow",
+        'strokeColor':"tan",
+        'lineWidthWC':4,
+        'border':True })
+    cobj.translate(-287, -536)
+    g.setGridboxSVG()
+    g.setWorldCoords(-250, -320, 500)
+    # draw the spiral center dot
+    g.drawShape(shapedefs.circle(8), {'fillColor':"tan"})
+    # draw the 50 spiral segments
+    scale = 1
+    for i in range(50):
+        scale = scale/1.08
+        g.render(cobj, {'scl':scale, 'degs':i*24.5})
+
+drawSpiral("cango_canvas2")
+</script>
+
+<p>上述繪圖程式碼:</p>
+<pre class="brush: python">
+<canvas id="cango_canvas2" width="800" height="800"></canvas>
+
+<script type="text/python3">
+from browser import document as doc
+from browser import window
+import math
+# 利用 window 擷取 Cango 物件, 然後以 new 方法轉為 Brython 物件
+cango = window.Cango.new
+shape = window.Shape.new
+shapedefs = window.shapeDefs
+
+def drawSpiral(cvsID):
+    g = cango(cvsID)
+    chamber = ['M',289.16,447.14,
+                 'C',233.33,399.03, 267.47,290.34, 364.53,265.28,
+                     408.88,269.91, 448.14,282.58, 483.22,303.79,
+                     391.79,287.12, 292.99,369.50, 331.90,451.11,
+                     318.79,447.43, 302.35,446.61, 289.16,447.14, 'z']
+    cobj = shape(chamber, {
+        'fillColor':"lightyellow",
+        'strokeColor':"tan",
+        'lineWidthWC':4,
+        'border':True })
+    cobj.translate(-287, -536)
+    g.setGridboxSVG()
+    g.setWorldCoords(-250, -320, 500)
+    # draw the spiral center dot
+    g.drawShape(shapedefs.circle(8), {'fillColor':"tan"})
+    # draw the 50 spiral segments
+    scale = 1
+    for i in range(50):
+        scale = scale/1.08
+        g.render(cobj, {'scl':scale, 'degs':i*24.5})
+
+drawSpiral("cango_canvas2")
+</script>
+</pre>
+
+<p>目前正透過 <a href="https://github.com/mdecourse/kmol2018">https://github.com/mdecourse/kmol2018</a> 測試 Windows 64 位元可攜 Python3.6.1 與 Brython 3.3.1 的應用, 已經發現 Pelican DISPLAY_PAGES_ON_MENU 無法運作, 且 Brython 3.3.1 在 Windows 環境中無法正確擷取字串值.</p>
+<h3><a href="http://snapsvg.io/">Snap 程式庫</a></h3>
+<script type="text/javascript" src="./../data/w11/snap/snap.svg-min.js"></script>
+
+<p><svg id="svgout" width="800" height="500" viewBox="0 0 800 500"></svg></p>
+<script type="text/python">
+from browser import alert
+from browser import window, document
+# 將 Snap 轉為 Brython 物件
+snap = window.Snap.new
+# 使用 id 為 "svgout" 的 svg 標註進行繪圖
+s = snap("#svgout")
+
+offsetY = 50
+
+# 是否標示出繪圖範圍
+#borderRect = s.rect(0,0,800,640,10,10).attr({ 'stroke': "silver", 'fill': "silver", 'strokeWidth': "3" })
+
+g = s.group().transform('t250,120')
+r0 = s.rect(150,150,100,100,20,20).attr({ 'fill': "orange", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c0 = s.circle(225,225,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4"  }).attr({ 'id': 'c0' })
+g0 = s.group( r0,c0 ).attr({ 'id': 'g0' })
+#g0.animate({ 'transform' : 't250,120r360,225,225' },4000)
+g0.appendTo( g )
+g0.animate({ 'transform' : 'r360,225,225' },4000)
+# 讓 g0 可以拖動
+g0.drag()
+
+r1 = s.rect(100,100,100,100,20,20).attr({ 'fill': "red", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c1 = s.circle(175,175,10).attr({ 'fill': "silver", 'stroke': "black" , 'strokeWidth': "4"}).attr({ 'id': 'c1' })
+g1 = s.group( r1,c1 ).attr({ 'id': 'g1' })
+g1.appendTo( g0 ).attr({ 'id': 'g1' })
+g1.animate({ 'transform' : 'r360,175,175' },4000)
+
+r2 = s.rect(50,50,100,100,20,20).attr({ 'fill': "blue", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c2 = s.circle(125,125,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4" }).attr({ 'id': 'c2' })
+g2 = s.group(r2,c2).attr({ 'id': 'g2' })
+
+g2.appendTo( g1 );
+g2.animate( { 'transform' : 'r360,125,125' },4000);
+
+r3 = s.rect(0,0,100,100,20,20).attr({ 'fill': "yellow", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c3 = s.circle(75,75,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4" }).attr({ 'id': 'c3' })
+g3 = s.group(r3,c3).attr({ 'id': 'g3' })
+
+g3.appendTo( g2 )
+g3.animate( { 'transform' : 'r360,75,75' },4000)
+
+r4 = s.rect(-50,-50,100,100,20,20).attr({ 'fill': "green", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c4 = s.circle(25,25,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4" }).attr({ 'id': 'c4' })
+g4 = s.group(r4,c4).attr({ 'id': 'g4' });
+g4.appendTo( g3 )
+g4.animate( { 'transform' : 'r360,25,25' },4000)
+</script>
+
+<p>上述 Snap 繪圖程式碼:</p>
+<pre class="brush: python">
+<script type="text/javascript" src="./../data/w11/snap/snap.svg-min.js"></script>
+
+<svg id="svgout" width="800" height="500" viewBox="0 0 800 500"></svg>
+
+<script type="text/python">
+from browser import alert
+from browser import window, document
+# 將 Snap 轉為 Brython 物件
+snap = window.Snap.new
+# 使用 id 為 "svgout" 的 svg 標註進行繪圖
+s = snap("#svgout")
+
+offsetY = 50
+
+# 是否標示出繪圖範圍
+#borderRect = s.rect(0,0,800,640,10,10).attr({ 'stroke': "silver", 'fill': "silver", 'strokeWidth': "3" })
+
+g = s.group().transform('t250,120')
+r0 = s.rect(150,150,100,100,20,20).attr({ 'fill': "orange", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c0 = s.circle(225,225,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4"  }).attr({ 'id': 'c0' })
+g0 = s.group( r0,c0 ).attr({ 'id': 'g0' })
+#g0.animate({ 'transform' : 't250,120r360,225,225' },4000)
+g0.appendTo( g )
+g0.animate({ 'transform' : 'r360,225,225' },4000)
+# 讓 g0 可以拖動
+g0.drag()
+
+r1 = s.rect(100,100,100,100,20,20).attr({ 'fill': "red", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c1 = s.circle(175,175,10).attr({ 'fill': "silver", 'stroke': "black" , 'strokeWidth': "4"}).attr({ 'id': 'c1' })
+g1 = s.group( r1,c1 ).attr({ 'id': 'g1' })
+g1.appendTo( g0 ).attr({ 'id': 'g1' })
+g1.animate({ 'transform' : 'r360,175,175' },4000)
+
+r2 = s.rect(50,50,100,100,20,20).attr({ 'fill': "blue", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c2 = s.circle(125,125,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4" }).attr({ 'id': 'c2' })
+g2 = s.group(r2,c2).attr({ 'id': 'g2' })
+
+g2.appendTo( g1 );
+g2.animate( { 'transform' : 'r360,125,125' },4000);
+
+r3 = s.rect(0,0,100,100,20,20).attr({ 'fill': "yellow", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c3 = s.circle(75,75,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4" }).attr({ 'id': 'c3' })
+g3 = s.group(r3,c3).attr({ 'id': 'g3' })
+
+g3.appendTo( g2 )
+g3.animate( { 'transform' : 'r360,75,75' },4000)
+
+r4 = s.rect(-50,-50,100,100,20,20).attr({ 'fill': "green", 'opacity': "0.8", 'stroke': "black", 'strokeWidth': "2" })
+c4 = s.circle(25,25,10).attr({ 'fill': "silver", 'stroke': "black", 'strokeWidth': "4" }).attr({ 'id': 'c4' })
+g4 = s.group(r4,c4).attr({ 'id': 'g4' });
+g4.appendTo( g3 )
+g4.animate( { 'transform' : 'r360,25,25' },4000)
+</script>
+</pre>
+
+<p><svg id="svgout1" width="800" height="500" viewBox="0 0 800 500"></svg></p>
+<script type="text/python">
+from browser import window
+from browser import document
+# 將 Snap 轉為 Brython 物件
+snap = window.Snap.new
+
+s = snap("#svgout1")
+# 建立物件時, 同時設定 id 名稱
+r = s.rect(10,10,100,100).attr({'id': 'rect'})
+c = s.circle(100,100,50).attr({'id': 'circle'})
+r.attr('fill', 'red')
+c.attr({ 'fill': 'blue', 'stroke': 'black', 'strokeWidth': 10 })
+r.attr({ 'stroke': '#123456', 'strokeWidth': 20 })
+s.text(180,100, '點按一下圖形').attr({'fill' : 'blue',  'stroke': 'blue', 'stroke-width': 0.2 })
+
+g = s.group().attr({'id': 'tux'})
+
+def hoverover(ev):
+    g.animate({'transform': 's1.2r45,t180,20'}, 1000, window.mina.bounce)
+
+def hoverout(ev):
+    g.animate({'transform': 's1r0,t180,20'}, 1000, window.mina.bounce) 
+
+# callback 函式
+def onSVGLoaded(data):
+    #s.append(data)
+    g.append(data)
+    #g.hover(hoverover, hoverout )
+    g.text(300,100, '將滑鼠指向企鵝')
+
+# 利用 window.Snap.load 載入 svg 檔案
+tux = window.Snap.load("https://chiamingyen.github.io/kmolab_data/files/Dreaming_tux.svg", onSVGLoaded)
+g.transform('t180,20')
+
+# 與視窗事件對應的函式
+def rtoyellow(ev):
+    r.attr('fill', 'yellow')
+
+def ctogreen(ev):
+    c.attr('fill', 'green')
+
+# 根據物件 id 綁定滑鼠事件執行對應函式
+document['rect'].bind('click', rtoyellow)
+document['circle'].bind('click', ctogreen)
+document['tux'].bind('mouseover', hoverover)
+document['tux'].bind('mouseleave', hoverout)
+</script>
+
+<p>上述繪圖程式碼:</p>
+<pre class="brush: python">
+<svg id="svgout1" width="800" height="500" viewBox="0 0 800 500"></svg>
+
+<script type="text/python">
+from browser import window
+from browser import document
+# 將 Snap 轉為 Brython 物件
+snap = window.Snap.new
+
+s = snap("#svgout1")
+# 建立物件時, 同時設定 id 名稱
+r = s.rect(10,10,100,100).attr({'id': 'rect'})
+c = s.circle(100,100,50).attr({'id': 'circle'})
+r.attr('fill', 'red')
+c.attr({ 'fill': 'blue', 'stroke': 'black', 'strokeWidth': 10 })
+r.attr({ 'stroke': '#123456', 'strokeWidth': 20 })
+s.text(180,100, '點按一下圖形').attr({'fill' : 'blue',  'stroke': 'blue', 'stroke-width': 0.2 })
+
+g = s.group().attr({'id': 'tux'})
+
+def hoverover(ev):
+    g.animate({'transform': 's1.2r45,t180,20'}, 1000, window.mina.bounce)
+
+def hoverout(ev):
+    g.animate({'transform': 's1r0,t180,20'}, 1000, window.mina.bounce) 
+
+# callback 函式
+def onSVGLoaded(data):
+    #s.append(data)
+    g.append(data)
+    #g.hover(hoverover, hoverout )
+    g.text(300,100, '將滑鼠指向企鵝')
+
+# 利用 window.Snap.load 載入 svg 檔案
+tux = window.Snap.load("https://chiamingyen.github.io/kmolab_data/files/Dreaming_tux.svg", onSVGLoaded)
+g.transform('t180,20')
+
+# 與視窗事件對應的函式
+def rtoyellow(ev):
+    r.attr('fill', 'yellow')
+
+def ctogreen(ev):
+    c.attr('fill', 'green')
+
+# 根據物件 id 綁定滑鼠事件執行對應函式
+document['rect'].bind('click', rtoyellow)
+document['circle'].bind('click', ctogreen)
+document['tux'].bind('mouseover', hoverover)
+document['tux'].bind('mouseleave', hoverout)
+</script>
+</pre>
+
+<p>Other SVG library: </p>
+<p><a href="https://github.com/duopixel/Method-Draw">https://github.com/duopixel/Method-Draw</a></p>
+<p><a href="https://github.com/mozman/svgwrite">https://github.com/mozman/svgwrite</a></p>
             </div>
             <!-- /.entry-content -->
         </article>
