@@ -71,6 +71,7 @@
 <v t="leo.20170329112538.1"><vh>@edit 20170329.md</vh></v>
 <v t="leo.20170405083232.1"><vh>@edit 20170405.md</vh></v>
 <v t="leo.20170503115146.1"><vh>@edit 20170503.md</vh></v>
+<v t="leo.20170510092000.1"><vh>@edit 20170510.md</vh></v>
 <v t="yen.20170108171733.81" a="E"><vh>@path pages</vh>
 <v t="yen.20170108171733.82"><vh>@edit pages_1.md</vh></v>
 </v>
@@ -223,7 +224,7 @@
 <t tx="yen.20170108171605.1"></t>
 <t tx="yen.20170108171605.2">QTreeWidget {
     /* These apply to the selected item, but not to editing items.*/
-    background-color: #1104c9; /* Leo's traditional tree color */
+    background-color: #adc8ff; /* Leo's traditional tree color */
     selection-color: black; /* was white */
     selection-background-color: lightgrey;
     /* font-family: SansSerif; */
@@ -263,7 +264,7 @@ QTextEdit {
 
 /* The body pane */
 QTextEdit#richTextEdit {
-    background-color: #fdf5f5; /* A kind of pink. */
+    background-color: #fffda3; /* A kind of  yellow */
     selection-color: white;
     selection-background-color: red;
     /*font-family: DejaVu Sans Mono;*/
