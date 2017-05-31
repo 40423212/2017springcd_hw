@@ -338,6 +338,7 @@ brython({debug:1, pythonpath:['./../data/py']});
 <script type="text/python3">
 from browser import document as doc
 import math
+
 # deg 為角度轉為徑度的轉換因子
 deg = math.pi/180.
 # 定義 Spur 類別
@@ -365,23 +366,15 @@ class Spur(object):
         imax = 15
         # 在輸入的畫布上繪製直線, 由圓心到節圓 y 軸頂點畫一直線
         self.create_line(midx, midy, midx, midy-rp)
-        # 畫出 rp 圓, 畫圓函式尚未定義
-        #create_oval(midx-rp, midy-rp, midx+rp, midy+rp, width=2)
-        # a 為模數 (代表公制中齒的大小), 模數為節圓直徑(稱為節徑)除以齒數
-        # 模數也就是齒冠大小
+
         a=2*rp/n
         # d 為齒根大小, 為模數的 1.157 或 1.25倍, 這裡採 1.25 倍
         d=2.5*rp/n
         # ra 為齒輪的外圍半徑
         ra=rp+a
-        # 畫出 ra 圓, 畫圓函式尚未定義
-        #create_oval(midx-ra, midy-ra, midx+ra, midy+ra, width=1)
-        # rb 則為齒輪的基圓半徑
-        # 基圓為漸開線長齒之基準圓
+
         rb=rp*math.cos(pa*deg)
-        # 畫出 rb 圓 (基圓), 畫圓函式尚未定義
-        #create_oval(midx-rb, midy-rb, midx+rb, midy+rb, width=1)
-        # rd 為齒根圓半徑
+
         rd=rp-d
         # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
         # 畫出 rd 圓 (齒根圓), 畫圓函式尚未定義
@@ -466,30 +459,35 @@ n = 36
 # 壓力角
 pa = 20
 Spur(ctx).Gear(x, y, r, n, pa, "blue")
-# 以下列出 W11 2B 與 2A 未出席人數
-data = open("./../data/w11/2b0503.txt", encoding="utf-8").read()
-data1 = open("./../data/w11/2a0504.txt", encoding="utf-8").read()
-count = 0
-count1 = 0
-# 去掉前面兩列
-student = data.split("\n")[2:]
-student1 = data1.split("\n")[2:]
-for i in range(len(student)):
-    each = student[i].split("\t")
-    # 請注意, Brython 在 Windows 環境無法正確判定字串, 原因不明
-    if each[1] != "出席":
-        count = count + 1
-for i in range(len(student1)):
-    each1 = student1[i].split("\t")
-    if each1[1] != "present":
-        count1 = count1 + 1
-div = doc["onegear_div"]
-div <= "2b: " +  str(count) + "/" + str(len(student)) + "|" + "2a: " +  str(count1) + "/" + str(len(student1))
+
+ctx.beginPath()
+ctx.fillStyle = "   #2894FF"
+ctx.font = "35px ScriptS"
+ctx.fillText("40423212 ",440,350)
+ctx.stroke()
+
 </script>
 
-<canvas id="onegear" width="800" height="600"></canvas>
+<!-- 導入 Brython 標準程式庫 -->
 
-<div id="onegear_div" width="800" height="20"></div>
+<script src="../data/Brython-3.3.1/brython.js"></script>
+
+<script src="../data/Brython-3.3.1/brython_stdlib.js"></script>
+
+<!-- 啟動 Brython -->
+
+<script>
+window.onload=function(){
+// 設定 data/py 為共用程式路徑
+brython({debug:1, pythonpath:['./../data/py']});
+}
+</script>
+
+<!-- 以下實際利用  Brython 繪圖-->
+
+<canvas id="onegear2" width="800" height="600"></canvas>
+
+<div id="onegear2_div" width="800" height="20"></div>
 
 <script type="text/python3">
 from browser import document as doc
@@ -521,23 +519,15 @@ class Spur(object):
         imax = 15
         # 在輸入的畫布上繪製直線, 由圓心到節圓 y 軸頂點畫一直線
         self.create_line(midx, midy, midx, midy-rp)
-        # 畫出 rp 圓, 畫圓函式尚未定義
-        #create_oval(midx-rp, midy-rp, midx+rp, midy+rp, width=2)
-        # a 為模數 (代表公制中齒的大小), 模數為節圓直徑(稱為節徑)除以齒數
-        # 模數也就是齒冠大小
+
         a=2*rp/n
         # d 為齒根大小, 為模數的 1.157 或 1.25倍, 這裡採 1.25 倍
         d=2.5*rp/n
         # ra 為齒輪的外圍半徑
         ra=rp+a
-        # 畫出 ra 圓, 畫圓函式尚未定義
-        #create_oval(midx-ra, midy-ra, midx+ra, midy+ra, width=1)
-        # rb 則為齒輪的基圓半徑
-        # 基圓為漸開線長齒之基準圓
+
         rb=rp*math.cos(pa*deg)
-        # 畫出 rb 圓 (基圓), 畫圓函式尚未定義
-        #create_oval(midx-rb, midy-rb, midx+rb, midy+rb, width=1)
-        # rd 為齒根圓半徑
+
         rd=rp-d
         # 當 rd 大於 rb 時, 漸開線並非畫至 rb, 而是 rd
         # 畫出 rd 圓 (齒根圓), 畫圓函式尚未定義
@@ -612,35 +602,17 @@ class Spur(object):
             # lfx 為齒頂圓上的左側 x 座標, lfy 則為 y 座標
             # 下列為齒頂圓上用來近似圓弧的直線
             self.create_line(lfx,lfy,rfx,rfy,fill=color)
-canvas = doc['onegear']
+canvas = doc['onegear2']
 ctx = canvas.getContext("2d")
-x = 250
-y = 250
-r = 0.8*250
+x = (canvas.width)/2
+y = (canvas.height)/2
+r = 0.8*(canvas.height/2)
 # 齒數
 n = 36
 # 壓力角
 pa = 20
 Spur(ctx).Gear(x, y, r, n, pa, "blue")
-# 以下列出 W11 2B 與 2A 未出席人數
-data = open("./../data/w11/2b0503.txt", encoding="utf-8").read()
-data1 = open("./../data/w11/2a0504.txt", encoding="utf-8").read()
-count = 0
-count1 = 0
-# 去掉前面兩列
-student = data.split("\n")[2:]
-student1 = data1.split("\n")[2:]
-for i in range(len(student)):
-    each = student[i].split("\t")
-    # 請注意, Brython 在 Windows 環境無法正確判定字串, 原因不明
-    if each[1] != "出席":
-        count = count + 1
-for i in range(len(student1)):
-    each1 = student1[i].split("\t")
-    if each1[1] != "present":
-        count1 = count1 + 1
-div = doc["onegear_div"]
-div <= "2b: " +  str(count) + "/" + str(len(student)) + "|" + "2a: " +  str(count1) + "/" + str(len(student1))
+
 </script>
             </div>
             <!-- /.entry-content -->
