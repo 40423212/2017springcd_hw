@@ -203,7 +203,7 @@ class Spur(object):
     # 已經針對 n 大於等於 52 齒時的繪圖錯誤修正, 因為 base circle 與齒根圓大小必須進行判斷
     def Gear(self, midx, midy, rp, n=20, pa=20, color="black"):
         # 齒輪漸開線分成 15 線段繪製
-        imax = 15
+        imax = 7
         # 在輸入的畫布上繪製直線, 由圓心到節圓 y 軸頂點畫一直線
         self.create_line(midx, midy, midx, midy-rp)
 
@@ -299,6 +299,25 @@ n = 36
 # 壓力角
 pa = 20
 Spur(ctx).Gear(x, y, r, n, pa, "blue")
+ctx.beginPath() 
+ctx.lineWidth="600"
+ctx.strokeStyle="white"
+ctx.moveTo(0,600) 
+ctx.lineTo(800,600) 
+ctx.stroke()
+
+ctx.beginPath() 
+ctx.lineWidth="3"
+ctx.strokeStyle="red"
+ctx.moveTo(0,300) 
+ctx.lineTo(800,300) 
+ctx.stroke()
+
+ctx.beginPath()
+ctx.fillStyle = "   #2894FF"
+ctx.font = "35px ScriptS"
+ctx.fillText("40423212 ",330,450)
+ctx.stroke()
 
 &lt;/script&gt;</summary><category term="spur2"></category></entry><entry><title>cango2DSpurSimulate</title><link href="./cango2dspursimulate.html" rel="alternate"></link><published>2017-05-16T11:00:00+08:00</published><updated>2017-05-16T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-05-16:./cango2dspursimulate.html</id><summary type="html">&lt;p&gt;正齒輪2d模擬
 
