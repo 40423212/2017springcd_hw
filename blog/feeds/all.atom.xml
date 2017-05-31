@@ -155,6 +155,8 @@ ctx.stroke()
 
 &lt;/script&gt;
 
+&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/dFCv4SaXPtQ" frameborder="0" allowfullscreen&gt;&lt;/iframe&gt;
+
 &lt;!-- 導入 Brython 標準程式庫 --&gt;
 
 &lt;script src="../data/Brython-3.3.1/brython.js"&gt;&lt;/script&gt;
