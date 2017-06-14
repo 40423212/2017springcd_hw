@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>2017Spring 協同產品設計實習 (虎尾科大MDE)</title><link href="./" rel="alternate"></link><link href="./feeds/all.atom.xml" rel="self"></link><id>./</id><updated>2017-06-14T11:00:00+08:00</updated><entry><title>W17練習</title><link href="./w17lian-xi.html" rel="alternate"></link><published>2017-06-14T11:00:00+08:00</published><updated>2017-06-14T11:00:00+08:00</updated><author><name>yen</name></author><id>tag:,2017-06-14:./w17lian-xi.html</id><summary type="html">&lt;p&gt;組員協同練習
 
 各組員倉儲中的 Github 檔案推送&lt;/p&gt;
-&lt;p&gt;各組員網誌上的 2D 繪圖, 並將程式碼顯示在繪圖網誌文章中
+&lt;p&gt;各組員網誌上的 2D 繪圖, 並將程式碼顯示在繪圖網誌文章
 &lt;pre class="brush: python"&gt;&lt;/p&gt;
 &lt;p&gt;ѲԓolveSpaceREVa&lt;/p&gt;
 &lt;p&gt;Group.h.v=00000001
@@ -912,8 +912,9 @@ Constraint.entityA.v=000e0000
 Constraint.other=0
 Constraint.other2=0
 Constraint.reference=0
-AddConstraint
-&lt;/pre&gt;&lt;/p&gt;
+AddConstraint&lt;/p&gt;
+&lt;/pre&gt;
+
 &lt;p&gt;各組員倉儲中的子模組建立與運用, 並將程式碼顯示在繪圖網誌文章中&lt;/p&gt;
 &lt;p&gt;各組員 Solvespace 近端零組件繪圖, 並在各組員網誌中顯示指定的零組件&lt;/p&gt;
 &lt;p&gt;各組員 Solvespace 零件轉入 V-rep, 並設定驅動零件進行動態模擬&lt;/p&gt;
